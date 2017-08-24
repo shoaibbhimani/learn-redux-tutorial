@@ -1,81 +1,74 @@
-// import React from 'react';
-// import ReactDOM from 'react-dom';
+import React from 'react';
+import ReactDOM from 'react-dom';
 // import './index.css';
 // import App from './App';
 // import registerServiceWorker from './registerServiceWorker';
 
-// ReactDOM.render(<App />, document.getElementById('root'));
+// ;
 // registerServiceWorker();
 
 import { createStore } from "redux"
 
-//Adding a Task to a list
-//Delete
-//Edit 
-//Completed
+//Adding a new Task to List
+//Delete a task from a list
+//edit
+//completed
 
 
-var todosReducer = (state = [], action) => {
+const todosReducer = (state = [], action) => {
   switch(action.type){
-  	case "ADD_TODO":
-  	 return [
-  	 	...state,
-  	 	action.payload
-  	 ]
-  	 case "DEL_TODO":
-  	  return [
-  	  	...state.slice(0,action.payload),
-  	  	...state.slice(action.payload+1)
-  	  ]
-
-  	  case "COMPLETED_TODO":
-  	  return state.map((todoitem, index) => {
-  	  	if(action.payload === index){
-  	  		todoitem.isCompleted = !todoitem.isCompleted
-  	  	}
-
-  	  	return todoitem
-  	  })
-  	 default:
-  	  return state;
+    case "ADD_TODO":
+     return [
+      ...state,
+      action.payload
+     ]
+     case "DELETE_TODO":
+      return [
+        ...state.slice(0, action.payload),
+        ...state.slice(action.payload + 1),
+      ]
+     default:
+      return state;
   }
-}
+};
 
 const store = createStore(todosReducer)
 
 store.subscribe(() => {
-  console.log(store.getState())
+  ReactDOM.render(<App dispatch={store.dispatch} todos={store.getState()} />, document.getElementById('root'))
 })
-
-store.dispatch({
-	type:"ADD_TODO",
-	payload:{
-		text:"Learn Redux",
-		isCompleted:false
-	}
-})
-
-store.dispatch({
-	type:"ADD_TODO",
-	payload:{
-		text:"Learn React",
-		isCompleted:false
-	}
-})
-
-// store.dispatch({
-// 	type:"DEL_TODO",
-// 	payload:1
-// })
-
-store.dispatch({
-	type:"COMPLETED_TODO",
-	payload:0
-})
-
-
-
-
-//GetState
-//dipatch
+//dispatch
 //subscribe
+// getstate
+
+const App = ({ dispatch, todos }) => {
+  let inputVal = '';
+  return (
+        <div>
+          <input type="text" ref={(input) => inputVal = input } />
+          <button onClick={() => {
+              dispatch({
+                type:"ADD_TODO",
+                payload: inputVal.value
+              })
+              inputVal.value = "";
+          }}>Add Todo</button>
+          {
+            todos.map((text, index) => {
+              return <li key={index}>{text}
+                <button onClick={() => {
+                    dispatch({
+                      type:"DELETE_TODO",
+                      payload:index
+                    })
+                }}>
+                  Remove this item
+                </button>
+              </li>
+            })
+          }
+        </div>
+    )
+}
+
+ReactDOM.render(<App dispatch={store.dispatch} todos={store.getState()} />, document.getElementById('root'))
