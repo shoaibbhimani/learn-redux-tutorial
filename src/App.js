@@ -1,40 +1,30 @@
-// import React, { Component } from 'react';
-// import logo from './logo.svg';
-// import './App.css';
+import React, { Component } from "react";
+import logo from "./logo.svg";
+import "./App.css";
 
-// class App extends Component {
-//   constructor(){
-//     super()
-//     this.state = {
-//       showLogo:false
-//     }
-//   }
+import { connect } from "react-redux";
 
-//   toggleLogo = () => {
-//     this.setState({
-//       showLogo: !this.state.showLogo
-//     })
-//   }
+class App extends Component {
+	render() {
+		return (
+			<div className="App">
+				<div className="App-header">
+					<h2>Welcome to React</h2>
+					<button onClick={this.toggleLogo}>Toggle Logo</button>
+				</div>
+				<p className="App-intro">
+					To get started, edit <code>src/App.js</code> and save to
+					reload.
+				</p>
+			</div>
+		);
+	}
+}
 
-//   render() {
-//     return (
-//       <div className="App">
-//         <div className="App-header">
-//          {
-//           this.state.showLogo ? <img src={logo} className="App-logo" alt="logo" /> : null
-//          }
-          
-//           <h2>Welcome to React</h2>
-//           <button onClick={this.toggleLogo}>Toggle Logo</button>
-//         </div>
-//         <p className="App-intro">
-//           To get started, edit <code>src/App.js</code> and save to reload.
-//         </p>
-//       </div>
-//     );
-//   }
-// }
+const mapStateToProps = state => {
+	return {
+		todos: state
+	};
+};
 
-// export default App;
-
-
+export default connect(mapStateToProps, null)(App);
