@@ -11,28 +11,34 @@ import TodoItem from "../components/TodoItem.js";
 import {
 	addTodo,
 	deleteTodo,
-	editTodo
+	editTodo,
+	getTodos
 } from "../actionCreator/todo-action-creator.js";
 
 class App extends Component {
+	componentDidMount() {
+		this.props.getTodos();
+	}
 	render() {
-		const { todos, addTodo, deleteTodo, editTodo } = this.props;
+		const { todos, addTodo, deleteTodo, editTodo, isLoading } = this.props;
 		return (
 			<div className="App">
 				<AddTodo addTodo={addTodo} />
-				<ul className="list-group">
-					{todos.map((todo, index) => {
-						return (
-							<TodoItem
-								deleteTodo={deleteTodo}
-								editTodo={editTodo}
-								todo={todo}
-								key={index}
-								index={index}
-							/>
-						);
-					})}
-				</ul>
+				{isLoading
+					? "Loading"
+					: <ul className="list-group">
+							{todos.map((todo, index) => {
+								return (
+									<TodoItem
+										deleteTodo={deleteTodo}
+										editTodo={editTodo}
+										todo={todo}
+										key={index}
+										index={index}
+									/>
+								);
+							})}
+						</ul>}
 			</div>
 		);
 	}
@@ -40,8 +46,14 @@ class App extends Component {
 
 const mapStateToProps = state => {
 	return {
-		todos: state.todos
+		todos: state.todos.content,
+		isLoading: state.todos.isLoading
 	};
 };
 
-export default connect(mapStateToProps, { addTodo, deleteTodo, editTodo })(App);
+export default connect(mapStateToProps, {
+	addTodo,
+	deleteTodo,
+	editTodo,
+	getTodos
+})(App);

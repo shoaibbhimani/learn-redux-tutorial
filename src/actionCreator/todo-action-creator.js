@@ -1,8 +1,11 @@
 import {
 	ADD_TODO,
 	DELETE_TODO,
-	EDIT_TODO
+	EDIT_TODO,
+	GET_TODOS
 } from "../actionTypes/todo-action-types.js";
+
+import axios from "axios";
 
 const addTodo = ({ text }) => {
 	return {
@@ -30,4 +33,11 @@ const editTodo = ({ text, index }) => {
 	};
 };
 
-export { addTodo, deleteTodo, editTodo };
+const getTodos = () => {
+	return {
+		type: GET_TODOS,
+		payload: axios.get("https://jsonplaceholder.typicode.com/todos")
+	};
+};
+
+export { addTodo, deleteTodo, editTodo, getTodos };

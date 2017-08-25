@@ -22,7 +22,7 @@ class TodoItem extends React.Component {
 		const { todo } = this.props;
 		return (
 			<section>
-				{todo.text}
+				{todo.title}
 				<button
 					onClick={this.deleteItemFromState}
 					className="btn btn-default"
