@@ -7,7 +7,7 @@ import TodoItem from "../components/TodoItem.js";
 
 class App extends Component {
 	render() {
-		const { todos, addTodo, deleteTodo } = this.props;
+		const { todos, addTodo, deleteTodo, editTodo } = this.props;
 		return (
 			<div className="App">
 				<AddTodo addTodo={addTodo} />
@@ -16,6 +16,7 @@ class App extends Component {
 						return (
 							<TodoItem
 								deleteTodo={deleteTodo}
+								editTodo={editTodo}
 								todo={todo}
 								key={index}
 								index={index}
@@ -49,6 +50,15 @@ const mapDispatchToProps = dispatch => {
 			dispatch({
 				type: "DELETE_TODO",
 				payload: index
+			});
+		},
+		editTodo: ({ text, index }) => {
+			dispatch({
+				type: "EDIT_TODO",
+				payload: {
+					text,
+					index
+				}
 			});
 		}
 	};
