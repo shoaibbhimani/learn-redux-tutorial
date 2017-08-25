@@ -1,4 +1,4 @@
-const todosReducer = (state = [12], action) => {
+const todosReducer = (state = [], action) => {
   switch (action.type) {
     case "ADD_TODO":
       return [...state, action.payload];
