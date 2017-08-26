@@ -1,10 +1,11 @@
 //packages
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Route } from "react-router-dom";
 
 //components
-import AddTodo from "../components/AddTodo.js";
-import TodoItem from "../components/TodoItem.js";
+import AddTodo from "./AddTodo.js";
+import TodoList from "./TodoList.js";
 
 //Action Creators
 
@@ -19,20 +20,8 @@ class App extends Component {
 		const { todos, addTodo, deleteTodo, editTodo } = this.props;
 		return (
 			<div className="App">
-				<AddTodo addTodo={addTodo} />
-				<ul className="list-group">
-					{todos.map((todo, index) => {
-						return (
-							<TodoItem
-								deleteTodo={deleteTodo}
-								editTodo={editTodo}
-								todo={todo}
-								key={index}
-								index={index}
-							/>
-						);
-					})}
-				</ul>
+				<Route path="/newtodo" component={AddTodo} />
+				<Route path="/" component={TodoList} />
 			</div>
 		);
 	}

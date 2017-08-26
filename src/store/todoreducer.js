@@ -4,7 +4,7 @@ import {
   EDIT_TODO
 } from "../actionTypes/todo-action-types.js";
 
-const todosReducer = (state = [], action) => {
+const todosReducer = (state = [{ text: "Hello" }], action) => {
   switch (action.type) {
     case ADD_TODO:
       return [...state, action.payload];

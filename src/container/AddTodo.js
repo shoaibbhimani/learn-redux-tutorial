@@ -1,4 +1,7 @@
 import React from "react";
+import { connect } from "react-redux";
+
+import { addTodo } from "../actionCreator/todo-action-creator.js";
 
 class AddTodo extends React.Component {
 	addItemToState = e => {
@@ -20,4 +23,4 @@ class AddTodo extends React.Component {
 		);
 	}
 }
-export default AddTodo;
+export default connect(null, { addTodo })(AddTodo);
