@@ -1,6 +1,7 @@
 import React from "react";
 
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 
 class TodoDetails extends React.Component {
 	render() {
@@ -8,6 +9,11 @@ class TodoDetails extends React.Component {
 		const todo = todos.find((item, index) => {
 			return index === parseInt(match.params.id, 10);
 		});
+
+		if (typeof todo === "undefined") {
+			return <Redirect to="/" />;
+		}
+
 		return (
 			<section>
 				<section>
