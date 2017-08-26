@@ -4,11 +4,12 @@ import {
 	EDIT_TODO
 } from "../actionTypes/todo-action-types.js";
 
-const addTodo = ({ text }) => {
+const addTodo = ({ text, desc }) => {
 	return {
 		type: ADD_TODO,
 		payload: {
 			text,
+			desc,
 			completed: false
 		}
 	};
@@ -20,11 +21,12 @@ const deleteTodo = index => {
 	};
 };
 
-const editTodo = ({ text, index }) => {
+const editTodo = ({ text, index, desc }) => {
 	return {
 		type: EDIT_TODO,
 		payload: {
 			text,
+			desc,
 			index
 		}
 	};

@@ -9,17 +9,20 @@ class AddTodo extends React.Component {
 	addItemToState = e => {
 		e.preventDefault();
 		this.props.addTodo({
-			text: this.refs.addTodo.value
+			text: this.refs.text.value,
+			desc: this.refs.desc.value
 		});
 
-		this.refs.addTodo.value = "";
+		this.refs.text.value = "";
+		this.refs.desc.value = "";
 	};
 	render() {
 		return (
 			<div>
 				<NavLink to="/">Back to Index </NavLink>
 				<form onSubmit={this.addItemToState}>
-					<input type="text" ref="addTodo" />
+					<input type="text" ref="text" />
+					<input type="text" ref="desc" />
 					<button type="submit">Add Todo</button>
 				</form>
 			</div>

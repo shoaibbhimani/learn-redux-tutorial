@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 class TodoItem extends React.Component {
 	constructor() {
@@ -19,10 +20,12 @@ class TodoItem extends React.Component {
 	};
 
 	renderItem = () => {
-		const { todo } = this.props;
+		const { todo, index } = this.props;
 		return (
 			<section>
-				{todo.text}
+				<NavLink to={`/todo/${index}`}>
+					{" "}{todo.text}
+				</NavLink>
 				<button
 					onClick={this.deleteItemFromState}
 					className="btn btn-default"
@@ -43,10 +46,12 @@ class TodoItem extends React.Component {
 		e.preventDefault();
 		this.props.editTodo({
 			text: this.refs.editTodo.value,
+			desc: this.refs.editDesc.value,
 			index: this.props.index
 		});
 
 		this.refs.editTodo.value = "";
+		this.refs.editDesc.value = "";
 		this.toggleIsEditing();
 	};
 
@@ -55,6 +60,7 @@ class TodoItem extends React.Component {
 		return (
 			<form onSubmit={this.editItemToState}>
 				<input type="text" ref="editTodo" defaultValue={todo.text} />
+				<input type="text" ref="editDesc" defaultValue={todo.desc} />
 				<button type="submit">Edit Todo</button>
 			</form>
 		);

@@ -6,7 +6,7 @@ import { Route, Switch, withRouter } from "react-router-dom";
 //components
 import AddTodo from "./AddTodo.js";
 import TodoList from "./TodoList.js";
-
+import TodoDetails from "./TodoDetails.js";
 //Action Creators
 
 import {
@@ -22,7 +22,8 @@ class App extends Component {
 			<div className="App">
 				<Switch>
 					<Route path="/newtodo" component={AddTodo} />
-					<Route path="/" component={TodoList} />
+					<Route exact path="/" component={TodoList} />
+					<Route path="/todo/:id" component={TodoDetails} />
 				</Switch>
 			</div>
 		);
