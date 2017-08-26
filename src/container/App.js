@@ -1,7 +1,7 @@
 //packages
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Route } from "react-router-dom";
+import { Route, Switch, withRouter } from "react-router-dom";
 
 //components
 import AddTodo from "./AddTodo.js";
@@ -20,8 +20,10 @@ class App extends Component {
 		const { todos, addTodo, deleteTodo, editTodo } = this.props;
 		return (
 			<div className="App">
-				<Route path="/newtodo" component={AddTodo} />
-				<Route path="/" component={TodoList} />
+				<Switch>
+					<Route path="/newtodo" component={AddTodo} />
+					<Route path="/" component={TodoList} />
+				</Switch>
 			</div>
 		);
 	}
@@ -33,4 +35,6 @@ const mapStateToProps = state => {
 	};
 };
 
-export default connect(mapStateToProps, { addTodo, deleteTodo, editTodo })(App);
+export default withRouter(
+	connect(mapStateToProps, { addTodo, deleteTodo, editTodo })(App)
+);

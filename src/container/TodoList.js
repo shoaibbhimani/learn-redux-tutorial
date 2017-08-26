@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 
+import { NavLink } from "react-router-dom";
+
 import TodoItem from "../components/TodoItem.js";
 
 import { deleteTodo, editTodo } from "../actionCreator/todo-action-creator.js";
@@ -10,6 +12,7 @@ class TodoList extends React.Component {
 		const { todos, deleteTodo, editTodo } = this.props;
 		return (
 			<section>
+				<NavLink to="/newtodo">Add New Todo</NavLink>
 				<ul className="list-group">
 					{todos.map((todo, index) => {
 						return (
