@@ -1,9 +1,3 @@
-import {
-  ADD_TODO,
-  DELETE_TODO,
-  EDIT_TODO
-} from "../actionTypes/todo-action-types.js";
-
 const todosReducer = (state = [], action) => {
   switch (action.type) {
     case ADD_TODO:
