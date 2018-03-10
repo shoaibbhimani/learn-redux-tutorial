@@ -9,39 +9,48 @@ import TodoItem from "../components/TodoItem.js";
 //Action Creators
 
 import {
-	addTodo,
-	deleteTodo,
-	editTodo
+  addTodo,
+  deleteTodo,
+  editTodo,
+  getTodos
 } from "../actionCreator/todo-action-creator.js";
 
 class App extends Component {
-	render() {
-		const { todos, addTodo, deleteTodo, editTodo } = this.props;
-		return (
-			<div className="App">
-				<AddTodo addTodo={addTodo} />
-				<ul className="list-group">
-					{todos.map((todo, index) => {
-						return (
-							<TodoItem
-								deleteTodo={deleteTodo}
-								editTodo={editTodo}
-								todo={todo}
-								key={index}
-								index={index}
-							/>
-						);
-					})}
-				</ul>
-			</div>
-		);
-	}
+  componentDidMount() {
+    this.props.getTodos();
+  }
+  render() {
+    const { todos, addTodo, deleteTodo, editTodo } = this.props;
+    return (
+      <div className="App">
+        <AddTodo addTodo={addTodo} />
+        <ul className="list-group">
+          {todos.map((todo, index) => {
+            return (
+              <TodoItem
+                deleteTodo={deleteTodo}
+                editTodo={editTodo}
+                todo={todo}
+                key={index}
+                index={index}
+              />
+            );
+          })}
+        </ul>
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = state => {
-	return {
-		todos: state.todos
-	};
+  return {
+    todos: state.todos
+  };
 };
 
-export default connect(mapStateToProps, { addTodo, deleteTodo, editTodo })(App);
+export default connect(mapStateToProps, {
+  getTodos,
+  addTodo,
+  deleteTodo,
+  editTodo
+})(App);

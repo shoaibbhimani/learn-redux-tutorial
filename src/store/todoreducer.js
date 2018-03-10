@@ -1,5 +1,14 @@
+import {
+  ADD_TODO,
+  DELETE_TODO,
+  EDIT_TODO,
+  GET_TODOS
+} from "../actionTypes/todo-action-types.js";
+
 const todosReducer = (state = [], action) => {
   switch (action.type) {
+    case GET_TODOS:
+      return [...state, ...action.payload];
     case ADD_TODO:
       return [...state, action.payload];
     case DELETE_TODO:
