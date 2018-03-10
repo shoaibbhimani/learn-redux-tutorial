@@ -40,10 +40,19 @@ const addTodo = ({ text }) => {
   };
 };
 
-const deleteTodo = index => {
-  return {
-    type: DELETE_TODO,
-    payload: index
+const deleteTodo = (index, todoId) => {
+  // return {
+  //   type: DELETE_TODO,
+  //   payload: index
+  // };
+
+  return dispatch => {
+    axios.delete(ROOTURL + "/" + todoId).then(() => {
+      dispatch({
+        type: DELETE_TODO,
+        payload: index
+      });
+    });
   };
 };
 
