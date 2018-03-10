@@ -1,3 +1,14 @@
 {
-  "todos": []
+  "todos": [
+    {
+      "text": "Learned Redux with ajax",
+      "completed": false,
+      "id": 1
+    },
+    {
+      "text": "Learning Reactj",
+      "completed": false,
+      "id": 2
+    }
+  ]
 }

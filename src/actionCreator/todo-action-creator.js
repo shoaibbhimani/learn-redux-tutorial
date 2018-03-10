@@ -25,13 +25,10 @@ const addTodo = ({ text }) => {
         text,
         completed: false
       })
-      .then(() => {
+      .then(response => {
         dispatch({
           type: ADD_TODO,
-          payload: {
-            text,
-            completed: false
-          }
+          payload: response.data
         });
       })
       .catch(() => {
@@ -56,13 +53,30 @@ const deleteTodo = (index, todoId) => {
   };
 };
 
-const editTodo = ({ text, index }) => {
+const editTodo = ({ index, todo }) => {
+  /*
   return {
     type: EDIT_TODO,
     payload: {
       text,
       index
     }
+  };*/
+
+  return dispatch => {
+    axios
+      .put(ROOTURL + "/" + todo.id, {
+        ...todo
+      })
+      .then(() => {
+        dispatch({
+          type: EDIT_TODO,
+          payload: {
+            text: todo.text,
+            index
+          }
+        });
+      });
   };
 };
 

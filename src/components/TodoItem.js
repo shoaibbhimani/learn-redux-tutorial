@@ -34,9 +34,10 @@ class TodoItem extends React.Component {
   };
 
   editItemToState = e => {
+    const { todo } = this.props;
     e.preventDefault();
     this.props.editTodo({
-      text: this.refs.editTodo.value,
+      todo: { ...todo, text: this.refs.editTodo.value },
       index: this.props.index
     });
 
